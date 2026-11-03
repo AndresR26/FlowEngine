@@ -8,14 +8,14 @@ Herramienta en Python para **capturar tráfico de red, convertirlo en flujos con
 
 ## Características
 
-- 📡 **Captura en vivo** con Scapy (Windows con Npcap, Linux con root).
-- 🏷️ **Etiquetado manual en vivo**: escribe la etiqueta mientras captura; cada cambio queda registrado con su hora exacta.
-- 🤖 **Etiquetado automático con IA** (`modelo_rf_ids.joblib`, scikit-learn) y script para entrenarlo.
-- 📂 **Procesamiento de archivos PCAP/PCAPNG** existentes.
-- 🔍 **Filtros estilo Wireshark** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) y variables derivadas.
-- 🌐 **Captura distribuida** Director → Agentes (inmediata o programada) con envío automático del CSV, protegida por token.
-- 🧬 Features de tiempo, tamaño, flags TCP, TLS (SNI, **JA3**), DNS, HTTP, entropía y contexto tipo UNSW-NB15.
-- 📊 **232 515 flujos etiquetados** de laboratorio (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection).
+- **Captura en vivo** con Scapy (Windows con Npcap, Linux con root).
+- **Etiquetado manual en vivo**: escribe la etiqueta mientras captura; cada cambio queda registrado con su hora exacta.
+- **Etiquetado automático con IA** (`modelo_rf_ids.joblib`, scikit-learn) y script para entrenarlo.
+- **Procesamiento de archivos PCAP/PCAPNG** existentes.
+- **Filtros estilo Wireshark** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) y variables derivadas.
+- **Captura distribuida** Director → Agentes (inmediata o programada) con envío automático del CSV, protegida por token.
+- Features de tiempo, tamaño, flags TCP, TLS (SNI, **JA3**), DNS, HTTP, entropía y contexto tipo UNSW-NB15.
+- **232 515 flujos etiquetados** de laboratorio (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection).
 
 ## Inicio rápido
 
