@@ -1,6 +1,6 @@
 # FlowEngine — Generador de Datasets para IDS
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23932954.svg)](https://doi.org/10.5281/zenodo.23932954)
 
 🇪🇸 Español · [🇬🇧 English](README.en.md)
 
@@ -10,14 +10,14 @@ Herramienta en Python para **capturar tráfico de red, convertirlo en flujos (91
 
 ## Características
 
-- **Captura en vivo** con Scapy (Windows con Npcap, Linux con root).
-- **Etiquetado manual en vivo**: escribe la etiqueta mientras captura; cada cambio queda registrado con su hora exacta.
-- **Etiquetado automático con IA** (`modelo_rf_ids.joblib`, scikit-learn) y script para entrenarlo.
-- **Procesamiento de archivos PCAP/PCAPNG** existentes.
-- **Filtros estilo Wireshark** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) y variables derivadas.
-- **Captura distribuida** Director → Agentes (inmediata o programada) con envío automático del CSV, protegida por token.
-- Cada flujo tiene **91 columnas**: identificación (IPs, puertos, protocolo, horas), **64 características numéricas** usadas por el modelo y la etiqueta. Incluyen tiempo, tamaño, flags TCP, TLS (SNI, **JA3**), DNS, HTTP, entropía y contexto tipo UNSW-NB15.
-- **232 515 flujos etiquetados en bruto** de laboratorio (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection); **223 763** quedan utilizables para entrenar tras la limpieza. Publicados en [Zenodo](https://doi.org/10.5281/zenodo.XXXXXXX).
+- 📡 **Captura en vivo** con Scapy (Windows con Npcap, Linux con root).
+- 🏷️ **Etiquetado manual en vivo**: escribe la etiqueta mientras captura; cada cambio queda registrado con su hora exacta.
+- 🤖 **Etiquetado automático con IA** (`modelo_rf_ids.joblib`, scikit-learn) y script para entrenarlo.
+- 📂 **Procesamiento de archivos PCAP/PCAPNG** existentes.
+- 🔍 **Filtros estilo Wireshark** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) y variables derivadas.
+- 🌐 **Captura distribuida** Director → Agentes (inmediata o programada) con envío automático del CSV, protegida por token.
+- 🧬 Cada flujo tiene **91 columnas**: identificación (IPs, puertos, protocolo, horas), **64 características numéricas** usadas por el modelo y la etiqueta. Incluyen tiempo, tamaño, flags TCP, TLS (SNI, **JA3**), DNS, HTTP, entropía y contexto tipo UNSW-NB15.
+- 📊 **232 515 flujos etiquetados en bruto** de laboratorio (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection); **223 763** quedan utilizables para entrenar tras la limpieza (eliminación de duplicados y de filas con valores nulos o infinitos). Publicados en [Zenodo](https://doi.org/10.5281/zenodo.23932954).
 
 ## Inicio rápido
 
@@ -31,7 +31,7 @@ python flow_engine.py          # Windows: consola como Administrador · Linux: s
 python compilar.py             # genera FlowEngine.exe y SensorAgente.exe en src/dist/
 ```
 
-Entrenar el modelo con los datasets (descárgalos antes de [Zenodo](https://doi.org/10.5281/zenodo.XXXXXXX) y descomprímelos en `datasets/`):
+Entrenar el modelo con los datasets (descárgalos antes de [Zenodo](https://doi.org/10.5281/zenodo.23932954) y descomprímelos en `datasets/`):
 
 ```bash
 python training/entrenar_modelo.py --datos datasets --salida training/modelo_salida
@@ -72,9 +72,9 @@ Configura el mismo token en todos los equipos con un archivo `token_red.txt` jun
 
 ## Datos (Zenodo)
 
-Los CSV etiquetados y las capturas PCAP del laboratorio están publicados en **Zenodo**:
+Los CSV etiquetados y las capturas PCAP del laboratorio están publicados en **Zenodo** (este registro contiene solo los datos, no el código):
 
-**DOI: [10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX)**
+**DOI: [10.5281/zenodo.23932954](https://doi.org/10.5281/zenodo.23932954)**
 
 | Contenido | Detalle |
 |---|---|
@@ -85,7 +85,7 @@ El modelo `modelo_rf_ids.joblib` y los ejecutables compilados se publican en **G
 
 ## Cómo citar
 
-> Restrepo, A. (2026). *FlowEngine: generador de datasets de tráfico de red para IDS* [Conjunto de datos y software]. Zenodo. https://doi.org/10.5281/zenodo.XXXXXXX
+> Restrepo, A. (2026). *FlowEngine: generador de datasets de tráfico de red para IDS* [Conjunto de datos]. Zenodo. https://doi.org/10.5281/zenodo.23932954
 
 ## Uso responsable
 

@@ -1,6 +1,6 @@
 # FlowEngine — IDS Dataset Generator
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23932954.svg)](https://doi.org/10.5281/zenodo.23932954)
 
 [🇪🇸 Español](README.md) · 🇬🇧 English
 
@@ -10,14 +10,14 @@ Python tool that **captures network traffic, turns it into flows (91 columns, 64
 
 ## Features
 
-- **Live capture** with Scapy (Windows with Npcap, Linux as root).
-- **Live manual labelling**: type the label while capturing; every change is logged with its exact timestamp.
-- **Automatic AI labelling** (`modelo_rf_ids.joblib`, scikit-learn) plus the script to train it.
-- **Processing of existing PCAP/PCAPNG files**.
-- **Wireshark-style filters** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) and derived variables.
-- **Distributed capture** Director → Agents (immediate or scheduled) with automatic CSV upload, protected by a token.
-- Each flow has **91 columns**: identification (IPs, ports, protocol, timestamps), **64 numeric features** used by the model, and the label. They cover timing, size, TCP flag, TLS (SNI, **JA3**), DNS, HTTP, entropy and UNSW-NB15-style context features.
-- **232,515 raw labelled lab flows** (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection); **223,763** remain usable for training after cleaning. Published on [Zenodo](https://doi.org/10.5281/zenodo.XXXXXXX).
+- 📡 **Live capture** with Scapy (Windows with Npcap, Linux as root).
+- 🏷️ **Live manual labelling**: type the label while capturing; every change is logged with its exact timestamp.
+- 🤖 **Automatic AI labelling** (`modelo_rf_ids.joblib`, scikit-learn) plus the script to train it.
+- 📂 **Processing of existing PCAP/PCAPNG files**.
+- 🔍 **Wireshark-style filters** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) and derived variables.
+- 🌐 **Distributed capture** Director → Agents (immediate or scheduled) with automatic CSV upload, protected by a token.
+- 🧬 Each flow has **91 columns**: identification (IPs, ports, protocol, timestamps), **64 numeric features** used by the model, and the label. They cover timing, size, TCP flag, TLS (SNI, **JA3**), DNS, HTTP, entropy and UNSW-NB15-style context features.
+- 📊 **232,515 raw labelled lab flows** (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection); **223,763** remain usable for training after cleaning (duplicate removal and removal of rows with null or infinite values). Published on [Zenodo](https://doi.org/10.5281/zenodo.23932954).
 
 ## Quick start
 
@@ -31,7 +31,7 @@ python flow_engine.py          # Windows: Administrator console · Linux: sudo
 python compilar.py             # builds FlowEngine.exe and SensorAgente.exe in src/dist/
 ```
 
-Train the model on the datasets (download them from [Zenodo](https://doi.org/10.5281/zenodo.XXXXXXX) first and unzip into `datasets/`):
+Train the model on the datasets (download them from [Zenodo](https://doi.org/10.5281/zenodo.23932954) first and unzip into `datasets/`):
 
 ```bash
 python training/entrenar_modelo.py --datos datasets --salida training/modelo_salida
@@ -72,9 +72,9 @@ Set the same token on every machine with a `token_red.txt` file next to the prog
 
 ## Data (Zenodo)
 
-The labelled CSVs and the lab's PCAP captures are published on **Zenodo**:
+The labelled CSVs and the lab's PCAP captures are published on **Zenodo** (this record holds the data only, not the code):
 
-**DOI: [10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX)**
+**DOI: [10.5281/zenodo.23932954](https://doi.org/10.5281/zenodo.23932954)**
 
 | Content | Detail |
 |---|---|
@@ -85,7 +85,7 @@ The `modelo_rf_ids.joblib` model and the compiled executables are published on *
 
 ## How to cite
 
-> Restrepo, A. (2026). *FlowEngine: network-traffic dataset generator for IDS* [Dataset and software]. Zenodo. https://doi.org/10.5281/zenodo.XXXXXXX
+> Restrepo, A. (2026). *FlowEngine: network-traffic dataset generator for IDS* [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.23932954
 
 ## Responsible use
 
