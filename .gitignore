@@ -1,0 +1,55 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# --- PyInstaller (compilación) ---
+build/
+dist/
+*.spec
+
+# --- Ejecutables e instaladores (no redistribuir Npcap) ---
+*.exe
+*.msi
+installers/*
+!installers/README.md
+
+# --- Modelos de IA (subir por GitHub Releases o Git LFS) ---
+*.joblib
+*.pkl
+models/*
+!models/README.md
+
+# --- Capturas y datasets (pueden contener datos reales) ---
+*.pcap
+*.pcapng
+*.csv
+Capturas/
+capturas_remotas/
+datasets/*
+!datasets/README.md
+
+# --- Salidas del entrenamiento / training output ---
+training/modelo_salida/
+
+# --- Archivos que genera lab_attacks.sh ---
+lab/wordlist_corta.txt
+lab/cookies_dvwa.txt
+lab/slow_test*
+
+# --- Logs ---
+*.log
+
+# --- Configuración local / secretos ---
+.env
+config.local.*
+token_red.txt
+
+# --- SO / IDE ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
