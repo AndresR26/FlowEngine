@@ -33,7 +33,7 @@
 **FlowEngine** is a Python console tool that **generates network-traffic datasets** for training and evaluating Intrusion Detection Systems (IDS). It:
 
 - Captures live traffic (or reads `.pcap/.pcapng` files) with **Scapy**.
-- Groups packets into **bidirectional flows** and computes **90+ features** per flow (size and timing statistics, TCP flags, TLS/JA3, DNS, HTTP, entropy, etc.).
+- Groups packets into **bidirectional flows** and produces **91 columns** per flow, **64 of them numeric features** (size and timing statistics, TCP flags, TLS/JA3, DNS, HTTP, entropy, etc.).
 - Labels each flow **manually** (the operator types the label live) or **automatically** with a pre-trained **Random Forest** model (`modelo_rf_ids.joblib`).
 - Lets you **filter and derive variables** on the resulting dataset.
 - Supports **distributed capture**: a *Director* PC discovers agents (sensors) on the LAN, orders them to capture (immediately or scheduled) and receives the resulting CSV files.
@@ -104,7 +104,7 @@ FlowEngine/
 ├── lab/
 │   └── lab_attacks.sh            # Attack-traffic generator for the lab
 ├── legacy/                       # Earlier versions no longer used
-├── datasets/ · models/ · installers/   # README only: files go to GitHub Releases
+├── datasets/ · models/ · installers/   # README only: data on Zenodo; model on GitHub Releases
 └── docs/                         # ES/EN manuals, diagrams and PDFs
 ```
 

@@ -13,7 +13,7 @@
 ### Añadido / Added
 - Token configurable con `token_red.txt` o `FLOWENGINE_TOKEN`. / Configurable token.
 - `training/entrenar_modelo.py`, `tools/etiquetar_con_ground_truth.py`, `lab/lab_attacks.sh`.
-- Documentación de los datasets y de su publicación en Releases. / Dataset documentation and Release packaging.
+- Documentación de los datasets publicados en Zenodo. / Documentation of the datasets published on Zenodo.
 
 ## [1.0.0] — 2026-11
 

@@ -1,9 +1,9 @@
 # datasets/
 
-🇪🇸 Datasets generados con FlowEngine en un laboratorio aislado y usados para entrenar el modelo. Los archivos **no se guardan dentro del repositorio** (pesan ~88 MB los CSV y ~1,6 GB los PCAP); se publican como adjuntos en **GitHub → Releases**.
-🇬🇧 Datasets generated with FlowEngine in an isolated lab and used to train the model. The files are **not stored in the repository** (~88 MB of CSV and ~1.6 GB of PCAP); they are published as **GitHub → Releases** assets.
+🇪🇸 Datasets generados con FlowEngine en un laboratorio aislado y usados para entrenar el modelo. Los archivos **no se guardan dentro del repositorio** (pesan ~88 MB los CSV y ~1,6 GB los PCAP); están publicados en **Zenodo**: [10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX).
+🇬🇧 Datasets generated with FlowEngine in an isolated lab and used to train the model. The files are **not stored in the repository** (~88 MB of CSV and ~1.6 GB of PCAP); they are published on **Zenodo**: [10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX).
 
-Para usarlos / To use them: descarga `FlowEngine_datasets_csv.zip` del Release y descomprímelo aquí / download `FlowEngine_datasets_csv.zip` from the Release and unzip it here:
+Para usarlos / To use them: descarga los CSV de Zenodo y descomprímelos aquí / download the CSVs from Zenodo and unzip them here:
 
 ```bash
 python training/entrenar_modelo.py --datos datasets --salida training/modelo_salida
@@ -21,7 +21,10 @@ python training/entrenar_modelo.py --datos datasets --salida training/modelo_sal
 Todo el tráfico es de la red privada del laboratorio: no hay IPs públicas ni dominios de terceros en los CSV.
 All traffic belongs to the private lab network: the CSVs contain no public IPs or third-party domains.
 
-## CSV (91 columnas / columns, 232,515 flujos / flows)
+## CSV (91 columnas / columns, 232,515 flujos en bruto / raw flows)
+
+- **91 columnas / columns:** identificación (IPs, puertos, protocolo, horas, servicio…), **64 características numéricas** que usa el modelo y `Label`. / identification fields, **64 numeric features** used by the model, and `Label`.
+- **232,515** filas en bruto / raw rows → **223,763** utilizables para entrenar tras quitar filas con valores nulos o infinitos en las características (`training/entrenar_modelo.py`). / usable for training after dropping rows with null or infinite feature values.
 
 | Archivo / File | Flujos / Flows | Etiquetas / Labels | Tamaño / Size |
 |---|---:|---|---:|
@@ -59,5 +62,4 @@ Columnas: ver el diccionario de datos en el [manual técnico §8](../docs/es/man
 | `webattack.pcap` | 66 MB |
 | `webfz.pcap` | 50 MB |
 
-GitHub rechaza archivos de más de 100 MB dentro del repositorio, pero acepta adjuntos de hasta 2 GB por archivo en un Release. Súbelos sueltos (o comprimidos por grupos) al mismo Release que los CSV.
-GitHub rejects files over 100 MB inside a repository but accepts Release assets up to 2 GB each. Upload them individually (or zipped in groups) to the same Release as the CSVs.
+Disponibles en Zenodo / Available on Zenodo: [10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX).
