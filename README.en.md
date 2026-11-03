@@ -8,14 +8,14 @@ Python tool that **captures network traffic, turns it into flows with 90+ featur
 
 ## Features
 
-- 📡 **Live capture** with Scapy (Windows with Npcap, Linux as root).
-- 🏷️ **Live manual labelling**: type the label while capturing; every change is logged with its exact timestamp.
-- 🤖 **Automatic AI labelling** (`modelo_rf_ids.joblib`, scikit-learn) plus the script to train it.
-- 📂 **Processing of existing PCAP/PCAPNG files**.
-- 🔍 **Wireshark-style filters** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) and derived variables.
-- 🌐 **Distributed capture** Director → Agents (immediate or scheduled) with automatic CSV upload, protected by a token.
-- 🧬 Timing, size, TCP flag, TLS (SNI, **JA3**), DNS, HTTP, entropy and UNSW-NB15-style context features.
-- 📊 **232,515 labelled lab flows** (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection).
+- **Live capture** with Scapy (Windows with Npcap, Linux as root).
+- **Live manual labelling**: type the label while capturing; every change is logged with its exact timestamp.
+- **Automatic AI labelling** (`modelo_rf_ids.joblib`, scikit-learn) plus the script to train it.
+- **Processing of existing PCAP/PCAPNG files**.
+- **Wireshark-style filters** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) and derived variables.
+- **Distributed capture** Director → Agents (immediate or scheduled) with automatic CSV upload, protected by a token.
+- Timing, size, TCP flag, TLS (SNI, **JA3**), DNS, HTTP, entropy and UNSW-NB15-style context features.
+- **232,515 labelled lab flows** (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection).
 
 ## Quick start
 
