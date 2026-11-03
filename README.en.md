@@ -10,14 +10,14 @@ Python tool that **captures network traffic, turns it into flows (91 columns, 64
 
 ## Features
 
-- 📡 **Live capture** with Scapy (Windows with Npcap, Linux as root).
-- 🏷️ **Live manual labelling**: type the label while capturing; every change is logged with its exact timestamp.
-- 🤖 **Automatic AI labelling** (`modelo_rf_ids.joblib`, scikit-learn) plus the script to train it.
-- 📂 **Processing of existing PCAP/PCAPNG files**.
-- 🔍 **Wireshark-style filters** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) and derived variables.
-- 🌐 **Distributed capture** Director → Agents (immediate or scheduled) with automatic CSV upload, protected by a token.
-- 🧬 Each flow has **91 columns**: identification (IPs, ports, protocol, timestamps), **64 numeric features** used by the model, and the label. They cover timing, size, TCP flag, TLS (SNI, **JA3**), DNS, HTTP, entropy and UNSW-NB15-style context features.
-- 📊 **232,515 raw labelled lab flows** (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection); **223,763** remain usable for training after cleaning (duplicate removal and removal of rows with null or infinite values). Published on [Zenodo](https://doi.org/10.5281/zenodo.23932954).
+- **Live capture** with Scapy (Windows with Npcap, Linux as root).
+- **Live manual labelling**: type the label while capturing; every change is logged with its exact timestamp.
+- **Automatic AI labelling** (`modelo_rf_ids.joblib`, scikit-learn) plus the script to train it.
+- **Processing of existing PCAP/PCAPNG files**.
+- **Wireshark-style filters** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) and derived variables.
+- **Distributed capture** Director → Agents (immediate or scheduled) with automatic CSV upload, protected by a token.
+- Each flow has **91 columns**: identification (IPs, ports, protocol, timestamps), **64 numeric features** used by the model, and the label. They cover timing, size, TCP flag, TLS (SNI, **JA3**), DNS, HTTP, entropy and UNSW-NB15-style context features.
+- **232,515 raw labelled lab flows** (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection); **223,763** remain usable for training after cleaning (duplicate removal and removal of rows with null or infinite values). Published on [Zenodo](https://doi.org/10.5281/zenodo.23932954).
 
 ## Quick start
 
