@@ -97,6 +97,7 @@ FlowEngine/
 │   └── compilar.py               # PyInstaller build
 ├── training/
 │   └── entrenar_modelo.py        # Trains modelo_rf_ids.joblib (Random Forest)
+├── reproducibility/              # Rebuilds the papers' numbers and figures
 ├── tools/
 │   ├── etiquetar_con_ground_truth.py  # Labels a CSV with the UNSW-NB15 ground truth
 │   ├── generar_diagramas.py      # Regenerates docs/img diagrams
@@ -598,4 +599,5 @@ WantedBy=multi-user.target
 | [`training/entrenar_modelo.py`](../../training/entrenar_modelo.py) | Trains `modelo_rf_ids.joblib` (§9). |
 | [`tools/etiquetar_con_ground_truth.py`](../../tools/etiquetar_con_ground_truth.py) | Labels a CSV produced from a UNSW-NB15 PCAP by joining it with `NUSW-NB15_GT.csv` on the 4-tuple (IPs and ports). Adds `attack_cat` and `label` (0/1). Usage: `python tools/etiquetar_con_ground_truth.py --csv flows.csv --gt NUSW-NB15_GT.csv --salida labelled.csv` (needs `tqdm`). |
 | [`lab/lab_attacks.sh`](../../lab/lab_attacks.sh) | Generates the lab's attack traffic (nmap, hydra, hping3, slowloris, ffuf, sqlmap, bettercap) and pauses before each attack so the operator can switch the label in FlowEngine. **Isolated, self-owned lab only.** See [lab/README.md](../../lab/README.md). |
+| [`reproducibility/`](../../reproducibility/README.md) | Five scripts that, from the Zenodo PCAP and CSV files, rebuild the label audit, the corrected dataset, the Random Forest results (cross-validation and unseen captures), the CICFlowMeter comparison, latency and the papers' figures. |
 | [`tools/generar_diagramas.py`](../../tools/generar_diagramas.py) · [`tools/build_pdfs.sh`](../../tools/build_pdfs.sh) | Regenerate this documentation's diagrams and PDFs. |

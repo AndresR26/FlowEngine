@@ -1,6 +1,7 @@
 # FlowEngine — IDS Dataset Generator
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23932954.svg)](https://doi.org/10.5281/zenodo.23932954)
+[![Software DOI](https://img.shields.io/badge/software%20DOI-10.5281%2Fzenodo.23933561-blue)](https://doi.org/10.5281/zenodo.23933561)
+[![Data DOI](https://img.shields.io/badge/data%20DOI-10.5281%2Fzenodo.23932954-blue)](https://doi.org/10.5281/zenodo.23932954)
 
 [🇪🇸 Español](README.md) · 🇬🇧 English
 
@@ -10,14 +11,14 @@ Python tool that **captures network traffic, turns it into flows (91 columns, 64
 
 ## Features
 
-- **Live capture** with Scapy (Windows with Npcap, Linux as root).
-- **Live manual labelling**: type the label while capturing; every change is logged with its exact timestamp.
-- **Automatic AI labelling** (`modelo_rf_ids.joblib`, scikit-learn) plus the script to train it.
-- **Processing of existing PCAP/PCAPNG files**.
-- **Wireshark-style filters** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) and derived variables.
-- **Distributed capture** Director → Agents (immediate or scheduled) with automatic CSV upload, protected by a token.
-- Each flow has **91 columns**: identification (IPs, ports, protocol, timestamps), **64 numeric features** used by the model, and the label. They cover timing, size, TCP flag, TLS (SNI, **JA3**), DNS, HTTP, entropy and UNSW-NB15-style context features.
-- **232,515 raw labelled lab flows** (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection); **223,763** remain usable for training after cleaning (duplicate removal and removal of rows with null or infinite values). Published on [Zenodo](https://doi.org/10.5281/zenodo.23932954).
+- 📡 **Live capture** with Scapy (Windows with Npcap, Linux as root).
+- 🏷️ **Live manual labelling**: type the label while capturing; every change is logged with its exact timestamp.
+- 🤖 **Automatic AI labelling** (`modelo_rf_ids.joblib`, scikit-learn) plus the script to train it.
+- 📂 **Processing of existing PCAP/PCAPNG files**.
+- 🔍 **Wireshark-style filters** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) and derived variables.
+- 🌐 **Distributed capture** Director → Agents (immediate or scheduled) with automatic CSV upload, protected by a token.
+- 🧬 Each flow has **91 columns**: identification (IPs, ports, protocol, timestamps), **64 numeric features** used by the model, and the label. They cover timing, size, TCP flag, TLS (SNI, **JA3**), DNS, HTTP, entropy and UNSW-NB15-style context features.
+- 📊 **232,515 raw labelled lab flows** (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection); **223,763** remain usable for training after cleaning (duplicate removal and removal of rows with null or infinite values). Published on [Zenodo](https://doi.org/10.5281/zenodo.23932954).
 
 ## Quick start
 
@@ -51,6 +52,7 @@ python training/entrenar_modelo.py --datos datasets --salida training/modelo_sal
 FlowEngine/
 ├── src/            Main program (flow_engine, live_conf, pcap_conf, filters, network, agent, build)
 ├── training/       entrenar_modelo.py → modelo_rf_ids.joblib
+├── reproducibility/  Scripts that rebuild every number and figure of the papers
 ├── tools/          etiquetar_con_ground_truth.py · generar_diagramas.py · build_pdfs.sh
 ├── lab/            lab_attacks.sh — attack traffic for the isolated lab
 ├── legacy/         Earlier versions no longer used
@@ -81,9 +83,33 @@ The labelled CSVs and the lab's PCAP captures are published on **Zenodo** (this 
 | Labelled CSVs | 12 files · 91 columns · 232,515 raw flows (223,763 usable) |
 | PCAP | Raw lab traffic (≈1.6 GB) |
 
-The `modelo_rf_ids.joblib` model and the compiled executables are published on **GitHub Releases**.
+The `modelo_rf_ids.joblib` model and the compiled executables are published on **GitHub Releases**; every Release is archived on Zenodo under the software DOI: [10.5281/zenodo.23933561](https://doi.org/10.5281/zenodo.23933561).
+
+## Reproducibility
+
+The [`reproducibility/`](reproducibility/README.md) folder holds the scripts that rebuild every number and data figure of the papers from the Zenodo files: the label audit, the corrected dataset, the Random Forest results and the comparison with CICFlowMeter.
+
+```bash
+cd reproducibility
+pip install -r requirements.txt
+python 01_extract_flowengine.py --data DATA --work WORK --src ../src
+python 02_extract_cicflowmeter.py --data DATA --work WORK
+python 03_prepare_datasets.py --data DATA --work WORK
+python 04_results.py --data DATA --work WORK
+python 05_figures.py --data DATA --work WORK
+```
+
+`DATA` is the folder with the 12 PCAP and 12 CSV files from Zenodo; `WORK`, an empty output folder. Everything is deterministic (seed 42) except processing times.
 
 ## How to cite
+
+If you use the code, cite the software; if you use the data, cite the dataset. GitHub also offers a ready-made citation under **Cite this repository** (file [`CITATION.cff`](CITATION.cff)).
+
+**Software**
+
+> Restrepo, A. (2026). *FlowEngine* (version 1.1.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.23933561
+
+**Data**
 
 > Restrepo, A. (2026). *FlowEngine: network-traffic dataset generator for IDS* [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.23932954
 

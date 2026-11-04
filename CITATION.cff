@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "Si usas este software, cítalo así. / If you use this software, please cite it as below."
+title: "FlowEngine"
+type: software
+version: "1.1.0"
+date-released: "2026-11-03"
+doi: "10.5281/zenodo.23933561"
+license: MIT
+repository-code: "https://github.com/AndresR26/FlowEngine"
+authors:
+  - family-names: "Restrepo"
+    given-names: "Andres"
+keywords:
+  - intrusion detection
+  - network traffic
+  - dataset generation
+  - random forest
+  - scapy
+references:
+  - type: data
+    title: "FlowEngine Datasets"
+    doi: "10.5281/zenodo.23932954"
+    authors:
+      - family-names: "Restrepo"
+        given-names: "Andres"

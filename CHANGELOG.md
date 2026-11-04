@@ -12,6 +12,7 @@
 
 ### Añadido / Added
 - Token configurable con `token_red.txt` o `FLOWENGINE_TOKEN`. / Configurable token.
+- Carpeta `reproducibility/` con los scripts que reproducen las cifras de los artículos. / `reproducibility/` folder with the scripts that reproduce the papers' numbers.
 - `training/entrenar_modelo.py`, `tools/etiquetar_con_ground_truth.py`, `lab/lab_attacks.sh`.
 - Documentación de los datasets publicados en Zenodo. / Documentation of the datasets published on Zenodo.
 
