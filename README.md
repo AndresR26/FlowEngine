@@ -1,65 +1,126 @@
-# datasets/
+# FlowEngine — Generador de Datasets para IDS
 
-🇪🇸 Datasets generados con FlowEngine en un laboratorio aislado y usados para entrenar el modelo. Los archivos **no se guardan dentro del repositorio** (pesan ~88 MB los CSV y ~1,6 GB los PCAP); están publicados en **Zenodo**: [10.5281/zenodo.23932954](https://doi.org/10.5281/zenodo.23932954).
-🇬🇧 Datasets generated with FlowEngine in an isolated lab and used to train the model. The files are **not stored in the repository** (~88 MB of CSV and ~1.6 GB of PCAP); they are published on **Zenodo**: [10.5281/zenodo.23932954](https://doi.org/10.5281/zenodo.23932954).
+[![Software DOI](https://img.shields.io/badge/software%20DOI-10.5281%2Fzenodo.23933831-blue)](https://doi.org/10.5281/zenodo.23933831)
+[![Datos DOI](https://img.shields.io/badge/datos%20DOI-10.5281%2Fzenodo.23932954-blue)](https://doi.org/10.5281/zenodo.23932954)
 
-Para usarlos / To use them: descarga los CSV de Zenodo y descomprímelos aquí / download the CSVs from Zenodo and unzip them here:
+🇪🇸 Español · [🇬🇧 English](README.en.md)
+
+Herramienta en Python para **capturar tráfico de red, convertirlo en flujos (91 columnas, 64 de ellas características numéricas) y etiquetarlo** (a mano o con un modelo Random Forest), pensada para entrenar y evaluar **Sistemas de Detección de Intrusiones (IDS)**. Incluye un modo **distribuido** para capturar desde varios equipos de la LAN a la vez, el script de entrenamiento del modelo y el generador de tráfico de ataque del laboratorio.
+
+![Arquitectura de red](docs/img/topologia_red_es.png)
+
+## Características
+
+- **Captura en vivo** con Scapy (Windows con Npcap, Linux con root).
+- **Etiquetado manual en vivo**: escribe la etiqueta mientras captura; cada cambio queda registrado con su hora exacta.
+- **Etiquetado automático con IA** (`modelo_rf_ids.joblib`, scikit-learn) y script para entrenarlo.
+- **Procesamiento de archivos PCAP/PCAPNG** existentes.
+- **Filtros estilo Wireshark** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) y variables derivadas.
+- **Captura distribuida** Director → Agentes (inmediata o programada) con envío automático del CSV, protegida por token.
+- Cada flujo tiene **91 columnas**: identificación (IPs, puertos, protocolo, horas), **64 características numéricas** usadas por el modelo y la etiqueta. Incluyen tiempo, tamaño, flags TCP, TLS (SNI, **JA3**), DNS, HTTP, entropía y contexto tipo UNSW-NB15.
+- **232 515 flujos etiquetados en bruto** de laboratorio (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection); **223 763** quedan utilizables para entrenar tras la limpieza (eliminación de duplicados y de filas con valores nulos o infinitos). Publicados en [Zenodo](https://doi.org/10.5281/zenodo.23932954).
+
+## Inicio rápido
+
+```bash
+git clone https://github.com/AndresR26/FlowEngine.git
+cd FlowEngine
+pip install -r requirements.txt
+
+cd src
+python flow_engine.py          # Windows: consola como Administrador · Linux: sudo
+python compilar.py             # genera FlowEngine.exe y SensorAgente.exe en src/dist/
+```
+
+Entrenar el modelo con los datasets (descárgalos antes de [Zenodo](https://doi.org/10.5281/zenodo.23932954) y descomprímelos en `datasets/`):
 
 ```bash
 python training/entrenar_modelo.py --datos datasets --salida training/modelo_salida
 ```
 
-## Laboratorio / Lab
+## Documentación
 
-| Rol / Role | IP |
+| Documento | Español | English | PDF |
+|---|---|---|---|
+| Manual técnico (incluye arquitectura de red) | [manual_tecnico.md](docs/es/manual_tecnico.md) | [technical_manual.md](docs/en/technical_manual.md) | [ES](docs/pdf/Manual_Tecnico_FlowEngine_ES.pdf) · [EN](docs/pdf/Technical_Manual_FlowEngine_EN.pdf) |
+| Manual de usuario | [manual_usuario.md](docs/es/manual_usuario.md) | [user_manual.md](docs/en/user_manual.md) | [ES](docs/pdf/Manual_Usuario_FlowEngine_ES.pdf) · [EN](docs/pdf/User_Manual_FlowEngine_EN.pdf) |
+| Arquitectura de red | [Manual técnico §5](docs/es/manual_tecnico.md#5-arquitectura-de-red) | [Technical manual §5](docs/en/technical_manual.md#5-network-architecture) | |
+
+## Estructura del repositorio
+
+```text
+FlowEngine/
+├── src/            Programa principal (flow_engine, live_conf, pcap_conf, filtros, red, agente, compilar)
+├── training/       entrenar_modelo.py → modelo_rf_ids.joblib
+├── reproducibility/  Scripts que reconstruyen cada cifra y figura de los artículos
+├── tools/          etiquetar_con_ground_truth.py · generar_diagramas.py · build_pdfs.sh
+├── lab/            lab_attacks.sh — tráfico de ataque para el laboratorio aislado
+├── legacy/         Versiones anteriores que ya no se usan
+├── datasets/       README con estadísticas (los CSV/PCAP están en Zenodo)
+├── models/         README (el .joblib va en GitHub Releases)
+├── installers/     README con enlaces a Npcap y Nmap
+└── docs/           Manuales ES/EN, diagramas (img/) y PDF
+```
+
+## Puertos de red
+
+| Puerto | Protocolo | Equipo que escucha | Uso |
+|---|---|---|---|
+| 51500 | UDP | Agente | Descubrimiento (broadcast) |
+| 50050 | TCP | Agente | Órdenes de captura |
+| 51502 | TCP | Director | Recepción de CSV |
+
+Configura el mismo token en todos los equipos con un archivo `token_red.txt` junto al programa o con la variable `FLOWENGINE_TOKEN` (ver [manual técnico §5.2](docs/es/manual_tecnico.md#52-puertos-y-protocolos)).
+
+## Datos (Zenodo)
+
+Los CSV etiquetados y las capturas PCAP del laboratorio están publicados en **Zenodo** (este registro contiene solo los datos, no el código):
+
+**DOI: [10.5281/zenodo.23932954](https://doi.org/10.5281/zenodo.23932954)**
+
+| Contenido | Detalle |
 |---|---|
-| Servidor víctima / Victim server (DVWA, FTP, SSH, HTTP) | 192.168.1.10 |
-| Cliente legítimo / Legitimate client | 192.168.1.20 |
-| Atacante / Attacker (Kali, [`lab/lab_attacks.sh`](../lab/lab_attacks.sh)) | 192.168.1.30 |
-| Sensor FlowEngine (puerto espejo / mirror port) | 192.168.1.40 |
+| CSV etiquetados | 12 archivos · 91 columnas · 232 515 flujos en bruto (223 763 utilizables) |
+| PCAP | Tráfico crudo del laboratorio (≈1,6 GB) |
 
-Todo el tráfico es de la red privada del laboratorio: no hay IPs públicas ni dominios de terceros en los CSV.
-All traffic belongs to the private lab network: the CSVs contain no public IPs or third-party domains.
+El modelo `modelo_rf_ids.joblib` y los ejecutables compilados se publican en **GitHub Releases**; cada Release queda archivado en Zenodo con el DOI del software: [10.5281/zenodo.23933831](https://doi.org/10.5281/zenodo.23933831).
 
-## CSV (91 columnas / columns, 232,515 flujos en bruto / raw flows)
+## Reproducibilidad
 
-- **91 columnas / columns:** identificación (IPs, puertos, protocolo, horas, servicio…), **64 características numéricas** que usa el modelo y `Label`. / identification fields, **64 numeric features** used by the model, and `Label`.
-- **232,515** filas en bruto / raw rows → **223,763** utilizables para entrenar (`training/entrenar_modelo.py`): el script elimina las filas duplicadas (en estos CSV no hay ninguna) y las 8,752 filas con valores nulos o infinitos en las características. / usable for training: the script removes duplicate rows (there are none in these CSVs) and the 8,752 rows with null or infinite feature values.
+La carpeta [`reproducibility/`](reproducibility/README.es.md) contiene los scripts que reconstruyen todas las cifras y figuras de datos de los artículos a partir de los archivos de Zenodo: la auditoría de etiquetas, el dataset corregido, los resultados del Random Forest y la comparación con CICFlowMeter.
 
-| Archivo / File | Flujos / Flows | Etiquetas / Labels | Tamaño / Size |
-|---|---:|---|---:|
-| `ataque beacon-normal.csv` | 17,926 | normal 13,057 · beaconing 4,869 | 7.2 MB |
-| `bruteforce.csv` | 9,227 | normal 4,790 · bruteforce 4,437 | 3.7 MB |
-| `bruteforce2.csv` | 16,667 | bruteforce 8,656 · normal 8,011 | 6.6 MB |
-| `dos.csv` | 40,859 | dos 23,203 · normal 17,656 | 14.6 MB |
-| `fuzzer.csv` | 8,703 | normal 4,812 · fuzzer 3,891 | 3.5 MB |
-| `live_resultado.csv` | 22,874 | normal 18,304 · portscan 4,570 | 9.8 MB |
-| `normal-http.csv` ⚠️ | 17,581 | dos 9,072 · normal 8,509 | 7.1 MB |
-| `portscan.csv` | 51,687 | portscan 27,644 · normal 24,043 | 20.1 MB |
-| `prueba de fuego.csv` | 24,010 | normal 10,710 · dos 4,633 · fuzzer 4,406 · beaconing 4,261 | 9.6 MB |
-| `tcpsyn.csv` | 5,563 | normal 4,534 · dos 1,029 | 2.2 MB |
-| `webattack.csv` | 9,926 | normal 6,154 · injection 3,772 | 3.9 MB |
-| `webfuzzer.csv` | 7,492 | normal 4,387 · fuzzer 3,105 | 3.0 MB |
+```bash
+cd reproducibility
+pip install -r requirements.txt
+python 01_extract_flowengine.py --data DATA --work WORK --src ../src
+python 02_extract_cicflowmeter.py --data DATA --work WORK
+python 03_prepare_datasets.py --data DATA --work WORK
+python 04_results.py --data DATA --work WORK
+python 05_figures.py --data DATA --work WORK
+```
 
-⚠️ `normal-http.csv`: el nombre sugiere solo tráfico normal, pero el 52 % de las filas está etiquetado `dos`. Conviene confirmar si es correcto antes de publicarlo. / The name suggests normal traffic only, but 52 % of rows are labelled `dos`. Confirm this is intended before publishing.
+`DATA` es la carpeta con los 12 PCAP y los 12 CSV de Zenodo; `WORK`, una carpeta de salida vacía. Todo es determinista (semilla 42) salvo los tiempos de procesamiento.
 
-Columnas: ver el diccionario de datos en el [manual técnico §8](../docs/es/manual_tecnico.md#8-diccionario-de-datos-del-csv). / Columns: see the data dictionary in the [technical manual §8](../docs/en/technical_manual.md#8-csv-data-dictionary).
+## Cómo citar
 
-## PCAP (tráfico crudo / raw traffic)
+Si usas el código, cita el software; si usas los datos, cita el conjunto de datos. GitHub también ofrece la cita lista en **Cite this repository** (archivo [`CITATION.cff`](CITATION.cff)).
 
-| Archivo / File | Tamaño / Size |
-|---|---:|
-| `beacon-normal.pcap` | 120 MB |
-| `bruteforce.pcap` | 111 MB |
-| `bruteforce (2).pcap` | 61 MB |
-| `captura.pcap` | 147 MB |
-| `dos.pcap` | 109 MB |
-| `fuzzer.pcap` | 57 MB |
-| `http.pcap` | 105 MB |
-| `portscan.pcap` | 290 MB |
-| `prueba de fuego.pcap` | 419 MB |
-| `tcpsyn.pcap` | 37 MB |
-| `webattack.pcap` | 66 MB |
-| `webfz.pcap` | 50 MB |
+**Software**
 
-Disponibles en Zenodo / Available on Zenodo: [10.5281/zenodo.23932954](https://doi.org/10.5281/zenodo.23932954).
+> Restrepo González, A. F. (2026). *FlowEngine* (versión 1.1.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.23933831
+
+**Datos**
+
+> Restrepo González, A. F. (2026). *FlowEngine: generador de datasets de tráfico de red para IDS* [Conjunto de datos]. Zenodo. https://doi.org/10.5281/zenodo.23932954
+
+## Uso responsable
+
+Este software y `lab/lab_attacks.sh` son para **laboratorios y redes propias o autorizadas**. Capturar tráfico de terceros o lanzar ataques sin permiso puede ser ilegal.
+
+## Autor
+
+**Andrés Felipe Restrepo González** — Universidad Militar Nueva Granada · [ORCID 0009-0008-6542-2016](https://orcid.org/0009-0008-6542-2016) · [@AndresR26](https://github.com/AndresR26)
+
+## Licencia
+
+[MIT](LICENSE)
