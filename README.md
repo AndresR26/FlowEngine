@@ -11,14 +11,14 @@ Herramienta en Python para **capturar tráfico de red, convertirlo en flujos (91
 
 ## Características
 
-- 📡 **Captura en vivo** con Scapy (Windows con Npcap, Linux con root).
-- 🏷️ **Etiquetado manual en vivo**: escribe la etiqueta mientras captura; cada cambio queda registrado con su hora exacta.
-- 🤖 **Etiquetado automático con IA** (`modelo_rf_ids.joblib`, scikit-learn) y script para entrenarlo.
-- 📂 **Procesamiento de archivos PCAP/PCAPNG** existentes.
-- 🔍 **Filtros estilo Wireshark** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) y variables derivadas.
-- 🌐 **Captura distribuida** Director → Agentes (inmediata o programada) con envío automático del CSV, protegida por token.
-- 🧬 Cada flujo tiene **91 columnas**: identificación (IPs, puertos, protocolo, horas), **64 características numéricas** usadas por el modelo y la etiqueta. Incluyen tiempo, tamaño, flags TCP, TLS (SNI, **JA3**), DNS, HTTP, entropía y contexto tipo UNSW-NB15.
-- 📊 **232 515 flujos etiquetados en bruto** de laboratorio (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection); **223 763** quedan utilizables para entrenar tras la limpieza (eliminación de duplicados y de filas con valores nulos o infinitos). Publicados en [Zenodo](https://doi.org/10.5281/zenodo.23932954).
+- **Captura en vivo** con Scapy (Windows con Npcap, Linux con root).
+- **Etiquetado manual en vivo**: escribe la etiqueta mientras captura; cada cambio queda registrado con su hora exacta.
+- **Etiquetado automático con IA** (`modelo_rf_ids.joblib`, scikit-learn) y script para entrenarlo.
+- **Procesamiento de archivos PCAP/PCAPNG** existentes.
+- **Filtros estilo Wireshark** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) y variables derivadas.
+- **Captura distribuida** Director → Agentes (inmediata o programada) con envío automático del CSV, protegida por token.
+- Cada flujo tiene **91 columnas**: identificación (IPs, puertos, protocolo, horas), **64 características numéricas** usadas por el modelo y la etiqueta. Incluyen tiempo, tamaño, flags TCP, TLS (SNI, **JA3**), DNS, HTTP, entropía y contexto tipo UNSW-NB15.
+- **232 515 flujos etiquetados en bruto** de laboratorio (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection); **223 763** quedan utilizables para entrenar tras la limpieza (eliminación de duplicados y de filas con valores nulos o infinitos). Publicados en [Zenodo](https://doi.org/10.5281/zenodo.23932954).
 
 ## Inicio rápido
 
