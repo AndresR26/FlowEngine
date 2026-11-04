@@ -1,6 +1,6 @@
 # FlowEngine — IDS Dataset Generator
 
-[![Software DOI](https://img.shields.io/badge/software%20DOI-10.5281%2Fzenodo.23933561-blue)](https://doi.org/10.5281/zenodo.23933561)
+[![Software DOI](https://img.shields.io/badge/software%20DOI-10.5281%2Fzenodo.23933831-blue)](https://doi.org/10.5281/zenodo.23933831)
 [![Data DOI](https://img.shields.io/badge/data%20DOI-10.5281%2Fzenodo.23932954-blue)](https://doi.org/10.5281/zenodo.23932954)
 
 [🇪🇸 Español](README.md) · 🇬🇧 English
@@ -11,14 +11,14 @@ Python tool that **captures network traffic, turns it into flows (91 columns, 64
 
 ## Features
 
-- **Live capture** with Scapy (Windows with Npcap, Linux as root).
-- **Live manual labelling**: type the label while capturing; every change is logged with its exact timestamp.
-- **Automatic AI labelling** (`modelo_rf_ids.joblib`, scikit-learn) plus the script to train it.
-- **Processing of existing PCAP/PCAPNG files**.
-- **Wireshark-style filters** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) and derived variables.
-- **Distributed capture** Director → Agents (immediate or scheduled) with automatic CSV upload, protected by a token.
-- Each flow has **91 columns**: identification (IPs, ports, protocol, timestamps), **64 numeric features** used by the model, and the label. They cover timing, size, TCP flag, TLS (SNI, **JA3**), DNS, HTTP, entropy and UNSW-NB15-style context features.
-- **232,515 raw labelled lab flows** (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection); **223,763** remain usable for training after cleaning (duplicate removal and removal of rows with null or infinite values). Published on [Zenodo](https://doi.org/10.5281/zenodo.23932954).
+- 📡 **Live capture** with Scapy (Windows with Npcap, Linux as root).
+- 🏷️ **Live manual labelling**: type the label while capturing; every change is logged with its exact timestamp.
+- 🤖 **Automatic AI labelling** (`modelo_rf_ids.joblib`, scikit-learn) plus the script to train it.
+- 📂 **Processing of existing PCAP/PCAPNG files**.
+- 🔍 **Wireshark-style filters** (`tcp.port == 80`, `ip.src == '…'`, `&&`, `||`) and derived variables.
+- 🌐 **Distributed capture** Director → Agents (immediate or scheduled) with automatic CSV upload, protected by a token.
+- 🧬 Each flow has **91 columns**: identification (IPs, ports, protocol, timestamps), **64 numeric features** used by the model, and the label. They cover timing, size, TCP flag, TLS (SNI, **JA3**), DNS, HTTP, entropy and UNSW-NB15-style context features.
+- 📊 **232,515 raw labelled lab flows** (normal, dos, portscan, bruteforce, fuzzer, beaconing, injection); **223,763** remain usable for training after cleaning (duplicate removal and removal of rows with null or infinite values). Published on [Zenodo](https://doi.org/10.5281/zenodo.23932954).
 
 ## Quick start
 
@@ -83,7 +83,7 @@ The labelled CSVs and the lab's PCAP captures are published on **Zenodo** (this 
 | Labelled CSVs | 12 files · 91 columns · 232,515 raw flows (223,763 usable) |
 | PCAP | Raw lab traffic (≈1.6 GB) |
 
-The `modelo_rf_ids.joblib` model and the compiled executables are published on **GitHub Releases**; every Release is archived on Zenodo under the software DOI: [10.5281/zenodo.23933561](https://doi.org/10.5281/zenodo.23933561).
+The `modelo_rf_ids.joblib` model and the compiled executables are published on **GitHub Releases**; every Release is archived on Zenodo under the software DOI: [10.5281/zenodo.23933831](https://doi.org/10.5281/zenodo.23933831).
 
 ## Reproducibility
 
@@ -107,11 +107,11 @@ If you use the code, cite the software; if you use the data, cite the dataset. G
 
 **Software**
 
-> Restrepo, A. (2026). *FlowEngine* (version 1.1.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.23933561
+> Restrepo González, A. F. (2026). *FlowEngine* (version 1.1.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.23933831
 
 **Data**
 
-> Restrepo, A. (2026). *FlowEngine: network-traffic dataset generator for IDS* [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.23932954
+> Restrepo González, A. F. (2026). *FlowEngine: network-traffic dataset generator for IDS* [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.23932954
 
 ## Responsible use
 
@@ -119,7 +119,7 @@ This software and `lab/lab_attacks.sh` are meant for **labs and networks you own
 
 ## Author
 
-**Andres Restrepo** — [@AndresR26](https://github.com/AndresR26)
+**Andrés Felipe Restrepo González** — Universidad Militar Nueva Granada · [ORCID 0009-0008-6542-2016](https://orcid.org/0009-0008-6542-2016) · [@AndresR26](https://github.com/AndresR26)
 
 ## License
 

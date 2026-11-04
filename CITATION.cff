@@ -4,12 +4,14 @@ title: "FlowEngine"
 type: software
 version: "1.1.0"
 date-released: "2026-11-03"
-doi: "10.5281/zenodo.23933561"
+doi: "10.5281/zenodo.23933831"
 license: MIT
 repository-code: "https://github.com/AndresR26/FlowEngine"
 authors:
-  - family-names: "Restrepo"
-    given-names: "Andres"
+  - family-names: "Restrepo González"
+    given-names: "Andrés Felipe"
+    orcid: "https://orcid.org/0009-0008-6542-2016"
+    affiliation: "Universidad Militar Nueva Granada"
 keywords:
   - intrusion detection
   - network traffic
@@ -21,5 +23,7 @@ references:
     title: "FlowEngine Datasets"
     doi: "10.5281/zenodo.23932954"
     authors:
-      - family-names: "Restrepo"
-        given-names: "Andres"
+      - family-names: "Restrepo González"
+        given-names: "Andrés Felipe"
+        orcid: "https://orcid.org/0009-0008-6542-2016"
+        affiliation: "Universidad Militar Nueva Granada"
